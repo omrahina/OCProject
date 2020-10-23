@@ -3,6 +3,9 @@ package com.hemebiotech.analytics;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Mainly used for runtime testing
+ */
 public class Main {
 
     public static void main(String[] args){

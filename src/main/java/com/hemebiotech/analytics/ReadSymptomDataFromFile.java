@@ -14,7 +14,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	
 	/**
 	 * 
-	 * @param filename a full or partial path to file with symptom strings in it, one per line
+	 * @param filename a partial path to file with symptom strings in it, one per line
 	 */
 	public ReadSymptomDataFromFile (String filename) {
 		this.filename = filename;
@@ -43,6 +43,11 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		return result;
 	}
 
+	/**
+	 * @param filename a string that represents a file in the resources folder
+	 * @return a stream retrieved from the classLoader or throw an exception if the file doesn't exist
+	 * @throws FileNotFoundException
+	 */
 	private InputStream getFileFromResourcesAsStream(String filename) throws FileNotFoundException {
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 		InputStream inputStream = classloader.getResourceAsStream(filename);

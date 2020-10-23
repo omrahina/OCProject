@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * All operations concerning known symptoms
  */
 public interface ISymptomOperation {
 
