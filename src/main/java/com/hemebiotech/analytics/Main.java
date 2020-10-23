@@ -11,8 +11,11 @@ public class Main {
         SymptomStatistics symptomStatistics = new SymptomStatistics();
         WriteSymptomStatistics writer = new WriteSymptomStatistics();
         List<String> symptoms = reader.GetSymptoms();
-        Map<String, Long> counts = symptomStatistics.symptomCounter(symptoms);
+        //Case print all symptoms
+        //Map<String, Long> counts = symptomStatistics.symptomCounter(symptoms);
+        //Print symptoms containing keyword
+        Map<String, Long> counts = symptomStatistics.symptomCounter(symptoms, "pressure");
+        System.out.println("Printing the result... ");
         writer.printSymptomOccurrences(counts);
-        System.out.println("test " + counts.get("insomnia") );
     }
 }
