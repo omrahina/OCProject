@@ -1,8 +1,6 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,23 +10,24 @@ import java.util.List;
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
-	private String filepath;
+	private String filename;
 	
 	/**
 	 * 
-	 * @param filepath a full or partial path to file with symptom strings in it, one per line
+	 * @param filename a full or partial path to file with symptom strings in it, one per line
 	 */
-	public ReadSymptomDataFromFile (String filepath) {
-		this.filepath = filepath;
+	public ReadSymptomDataFromFile (String filename) {
+		this.filename = filename;
 	}
 	
 	@Override
 	public List<String> GetSymptoms() {
-		ArrayList<String> result = new ArrayList<String>();
+		ArrayList<String> result = new ArrayList<>();
 		
-		if (filepath != null) {
+		if (filename != null) {
 			try {
-				BufferedReader reader = new BufferedReader (new FileReader(filepath));
+				InputStream inputStream = getFileFromResourcesAsStream(filename);
+				BufferedReader reader = new BufferedReader (new InputStreamReader(inputStream));
 				String line = reader.readLine();
 				
 				while (line != null) {
@@ -44,4 +43,12 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		return result;
 	}
 
+	private InputStream getFileFromResourcesAsStream(String filename) throws FileNotFoundException {
+		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		InputStream inputStream = classloader.getResourceAsStream(filename);
+		if(inputStream == null){
+			throw new FileNotFoundException("File not found "+filename);
+		}
+		return inputStream;
+	}
 }

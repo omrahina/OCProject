@@ -1,8 +1,6 @@
 package com.hemebiotech.analytics;
 
-import com.hemebiotech.analytics.SymptomStatistics;
 import org.junit.jupiter.api.Test;
-
 
 import java.util.Arrays;
 import java.util.List;
