@@ -10,15 +10,18 @@ public class Main {
 
     public static void main(String[] args){
 
-        ReadSymptomDataFromFile reader = new ReadSymptomDataFromFile("symptoms.txt");
+        String propertiesFileName = "application.properties";
+        String symptomsFile = ReadSymptomDataFromFile.getProperty(propertiesFileName, "symptomsFile");
+        String resultsFile = ReadSymptomDataFromFile.getProperty(propertiesFileName, "resultsFile");
+
+        ReadSymptomDataFromFile reader = new ReadSymptomDataFromFile(symptomsFile);
         SymptomStatistics symptomStatistics = new SymptomStatistics();
-        WriteSymptomStatistics writer = new WriteSymptomStatistics();
+        WriteSymptomStatistics writer = new WriteSymptomStatistics(resultsFile);
+
         List<String> symptoms = reader.GetSymptoms();
-        //Case print all symptoms
-        //Map<String, Long> counts = symptomStatistics.symptomCounter(symptoms);
-        //Print symptoms containing keyword
-        Map<String, Long> counts = symptomStatistics.symptomCounter(symptoms, "pressure");
-        System.out.println("Printing the result... ");
+        Map<String, Long> counts = symptomStatistics.symptomCounter(symptoms);
+
+        System.out.println("Printing results into "+resultsFile+" ...");
         writer.printSymptomOccurrences(counts);
     }
 }
