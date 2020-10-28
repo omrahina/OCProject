@@ -1,10 +1,11 @@
 package com.hemebiotech.analytics;
 
-import java.io.*;
-import java.security.InvalidParameterException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Simple brute force implementation
@@ -25,10 +26,11 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	@Override
 	public List<String> getSymptoms() {
 		ArrayList<String> result = new ArrayList<>();
+		ResourceHandler resourceHandler = new ResourceHandler();
 		
 		if (filename != null) {
 			try {
-				InputStream inputStream = Configuration.getFileFromResourcesAsStream(filename);
+				InputStream inputStream = resourceHandler.getFileFromResourcesAsStream(filename);
 				BufferedReader reader = new BufferedReader (new InputStreamReader(inputStream));
 				String line = reader.readLine();
 				
