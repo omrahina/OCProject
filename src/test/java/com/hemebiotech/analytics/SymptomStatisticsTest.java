@@ -22,11 +22,4 @@ public class SymptomStatisticsTest {
         assertEquals(2, counts.get("insomnia"));
     }
 
-    @Test
-    public void symptomContainingCounter_ok(){
-        List<String> symptoms = Arrays.asList("headache", "constricted pupils", "pupils", "constricted pupils");
-        Map<String, Long> counts = symptomStatistics.symptomCounter(symptoms, "pupils");
-        assertTrue(counts.size() == 2);
-        assertTrue(!counts.containsKey("headache"));
-    }
 }

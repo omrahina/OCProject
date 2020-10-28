@@ -19,15 +19,4 @@ public class SymptomStatistics implements ISymptomOperation {
                 .collect(Collectors.groupingBy(e -> e, TreeMap::new, Collectors.counting()));
     }
 
-    /**
-     * @param symptoms
-     * @param keyword
-     * @return a map containing only symptoms that match a certain
-     * keyword along with their occurrence
-     */
-    public Map<String, Long> symptomCounter(List<String> symptoms, String keyword){
-        return symptoms.stream().filter(e -> e.contains(keyword))
-                .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
-    }
-    // TODO the equals method, new methodName or alter interface? ask Joffrey
 }
