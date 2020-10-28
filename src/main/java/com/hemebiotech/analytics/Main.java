@@ -10,18 +10,16 @@ public class Main {
 
     public static void main(String[] args){
 
-        String propertiesFileName = "application.properties";
-        String symptomsFile = ReadSymptomDataFromFile.getProperty(propertiesFileName, "symptomsFile");
-        String resultsFile = ReadSymptomDataFromFile.getProperty(propertiesFileName, "resultsFile");
+        Configuration configuration = new Configuration();
 
-        ReadSymptomDataFromFile reader = new ReadSymptomDataFromFile(symptomsFile);
+        ReadSymptomDataFromFile reader = new ReadSymptomDataFromFile(configuration.getSymptomsFile());
+        WriteSymptomStatistics writer = new WriteSymptomStatistics(configuration.getResultsFile());
         SymptomStatistics symptomStatistics = new SymptomStatistics();
-        WriteSymptomStatistics writer = new WriteSymptomStatistics(resultsFile);
 
-        List<String> symptoms = reader.GetSymptoms();
+        List<String> symptoms = reader.getSymptoms();
         Map<String, Long> counts = symptomStatistics.symptomCounter(symptoms);
 
-        System.out.println("Printing results into "+resultsFile+" ...");
+        System.out.println("Printing results into "+configuration.getResultsFile()+" ...");
         writer.printSymptomOccurrences(counts);
     }
 }

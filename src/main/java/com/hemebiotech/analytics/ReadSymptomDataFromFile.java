@@ -23,12 +23,12 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	}
 	
 	@Override
-	public List<String> GetSymptoms() {
+	public List<String> getSymptoms() {
 		ArrayList<String> result = new ArrayList<>();
 		
 		if (filename != null) {
 			try {
-				InputStream inputStream = getFileFromResourcesAsStream(filename);
+				InputStream inputStream = Configuration.getFileFromResourcesAsStream(filename);
 				BufferedReader reader = new BufferedReader (new InputStreamReader(inputStream));
 				String line = reader.readLine();
 				
@@ -45,38 +45,5 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		return result;
 	}
 
-	/**
-	 * @param filename a string that represents a file in the resources folder
-	 * @return a stream retrieved from the classLoader or throw an exception if the file doesn't exist
-	 * @throws FileNotFoundException
-	 */
-	public static InputStream getFileFromResourcesAsStream(String filename) throws FileNotFoundException {
-		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-		InputStream inputStream = classloader.getResourceAsStream(filename);
-		if(inputStream == null){
-			throw new FileNotFoundException("File not found "+filename);
-		}
-		return inputStream;
-	}
 
-	/**
-	 * @param propertiesFileName a file containing parameters as key-value pairs
-	 * @param key the property needed
-	 * @return the value corresponding to a specified key or throw an exception if the key isn't in the properties
-	 */
-	public static String getProperty(String propertiesFileName, String key){
-
-		String value = "";
-		Properties properties = new Properties();
-		try {
-			properties.load(getFileFromResourcesAsStream(propertiesFileName));
-			value = properties.getProperty(key);
-			if (value == null){
-				throw new InvalidParameterException("Missing value for key " +key);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return value;
-	}
 }
