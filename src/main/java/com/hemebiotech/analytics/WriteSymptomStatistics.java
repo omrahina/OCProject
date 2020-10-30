@@ -17,9 +17,6 @@ public class WriteSymptomStatistics implements ISymptomWriter{
         this.filename = filename;
     }
 
-    /**
-     * @param occurrences write plain key-value pairs into a file
-     */
     @Override
     public void printSymptomOccurrences(Map<String, Long> occurrences) {
         try {
