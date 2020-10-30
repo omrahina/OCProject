@@ -18,6 +18,7 @@ public class Configuration {
     }
 
     /**
+     * This method looks for a value throughout a properties file
      * @param propertiesFileName a file containing parameters as key-value pairs
      * @param key the property needed
      * @return the value corresponding to a specified key or throw an exception if the key isn't in the properties

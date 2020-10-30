@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Mainly used for runtime testing
+ * Entry point of the application
  */
 public class Main {
 
